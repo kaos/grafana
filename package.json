@@ -4,7 +4,7 @@
     "company": "Coding Instinct AB"
   },
   "name": "grafana",
-  "version": "1.9.0-rc1",
+  "version": "v1.9.0-rc1-36-g288e9e5-svs-aadt",
   "repository": {
     "type": "git",
     "url": "http://github.com/torkelo/grafana.git"
