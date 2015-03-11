@@ -351,12 +351,22 @@ function (angular, $, kbn, moment, _, GraphTooltip) {
             return th2.hit;
           }
 
+          function check_density(d) {
+            th1.hit |= (d < panel.grid.density1);
+            th2.hit |= (d < panel.grid.density2);
+            return th2.hit;
+          }
+
           function apply_visualizations() {
             var color;
             if (th2.hit) {
               color = th2.color;
-            } else {
+            } else if (th1.hit) {
               color = th1.color;
+            }
+            else
+            {
+              return;
             }
 
             color = window.tinycolor(color);
@@ -366,6 +376,10 @@ function (angular, $, kbn, moment, _, GraphTooltip) {
           }
 
           for (var series = 0; series < data.length; series++) {
+            if (check_density(data[series].stats.density)) {
+              break;
+            }
+
             var series_data = data[series].data;
             for (var i = 0; i < series_data.length; i++) {
               if (check_value(series_data[i][1])) {
@@ -375,9 +389,7 @@ function (angular, $, kbn, moment, _, GraphTooltip) {
             }
           }
 
-          if (th1.hit) {
-            apply_visualizations();
-          }
+          apply_visualizations();
         }
 
         function addAnnotations(options) {

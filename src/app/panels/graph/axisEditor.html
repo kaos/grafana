@@ -205,11 +205,17 @@
 					ng-model="panel.legend.current" ng-checked="panel.legend.current" ng-change="legendValuesOptionChanged()">
 					<label for="panel.legend.current" class="cr1"></label>
 				</li>
-				<li class="tight-form-item last">
+				<li class="tight-form-item">
 					Total&nbsp;
 					<input class="cr1" id="panel.legend.total" type="checkbox"
 					ng-model="panel.legend.total" ng-checked="panel.legend.total" ng-change="legendValuesOptionChanged()">
 					<label for="panel.legend.total" class="cr1"></label>
+				</li>
+				<li class="tight-form-item last">
+					Density&nbsp;
+					<input class="cr1" id="panel.legend.density" type="checkbox"
+					ng-model="panel.legend.density" ng-checked="panel.legend.density" ng-change="legendValuesOptionChanged()">
+					<label for="panel.legend.density" class="cr1"></label>
 				</li>
 			</ul>
 			<div class="clearfix"></div>
@@ -227,6 +233,25 @@
     <div class="editor-option">
       <label class="small">Border width <tip>Only visible when visualization is triggered</tip></label>
       <input type="number" class="input-small" ng-model="panel.grid.thresholdVisualBorderWidth" ng-change="render()" ng-model-onblur />
+    </div>
+  </div>
+  <div class="section">
+    <h5>Density levels</h5>
+    <div class="editor-option">
+      <label class="small">Warning <tip>Warn when the ratio of data
+          points vs null points gets too low (1 -
+          COUNT(null)/COUNT(total)). 0 = no warning, ever; 1 = warn
+          unless there is no null points; 0.5 = warn when there are
+          more null points than data points.</tip></label>
+      <input type="number" class-"input-small" ng-model="panel.grid.density1" ng-change="render()" ng-model-onblur />
+    </div>
+    <div class="editor-option">
+      <label class="small">Critical <tip>Warn when the ratio of data
+          points vs null points gets too low (1 -
+          COUNT(null)/COUNT(total)). 0 = no warning, ever; 1 = warn
+          unless there is no null points; 0.5 = warn when there are
+          more null points than data points.</tip></label>
+      <input type="number" class-"input-small" ng-model="panel.grid.density2" ng-change="render()" ng-model-onblur />
     </div>
   </div>
 </div>

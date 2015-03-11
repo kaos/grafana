@@ -68,18 +68,21 @@ function (_, kbn) {
     this.stats.min = Number.MAX_VALUE;
     this.stats.avg = null;
     this.stats.current = null;
+    this.stats.density = null;
     this.allIsNull = true;
 
     var ignoreNulls = fillStyle === 'connected';
     var nullAsZero = fillStyle === 'null as zero';
     var currentTime;
     var currentValue;
+    var nullCount = 0;
 
     for (var i = 0; i < this.datapoints.length; i++) {
       currentValue = this.datapoints[i][0];
       currentTime = this.datapoints[i][1];
 
       if (currentValue === null) {
+        nullCount++;
         if (ignoreNulls) { continue; }
         if (nullAsZero) {
           currentValue = 0;
@@ -115,6 +118,10 @@ function (_, kbn) {
       if (this.stats.current === null && result.length > 1) {
         this.stats.current = result[result.length-2][1];
       }
+    }
+
+    if (this.datapoints.length > 0) {
+      this.stats.density = 1 - (nullCount / this.datapoints.length);
     }
 
     return result;

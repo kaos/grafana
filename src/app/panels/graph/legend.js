@@ -104,6 +104,7 @@ function (angular, app, _, kbn, $) {
             var header = '<tr>';
             header += '<th colspan="2" style="text-align:left"></th>';
             if (panel.legend.values) {
+              header += getTableHeaderHtml('density');
               header += getTableHeaderHtml('min');
               header += getTableHeaderHtml('max');
               header += getTableHeaderHtml('avg');
@@ -148,8 +149,10 @@ function (angular, app, _, kbn, $) {
             var min = series.formatValue(series.stats.min);
             var max = series.formatValue(series.stats.max);
             var total = series.formatValue(series.stats.total);
+            var density = kbn.valueFormats.percent(series.stats.density * 100, 2);
 
             if (panel.legend.values) {
+              if (panel.legend.density) { html += '<div class="graph-legend-value density">' + density + '</div>'; }
               if (panel.legend.min) { html += '<div class="graph-legend-value min">' + min + '</div>'; }
               if (panel.legend.max) { html += '<div class="graph-legend-value max">' + max + '</div>'; }
               if (panel.legend.avg) { html += '<div class="graph-legend-value avg">' + avg + '</div>'; }

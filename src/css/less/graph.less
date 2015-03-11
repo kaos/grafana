@@ -40,6 +40,9 @@
   &.avg:before {
     content: "Avg: "
   }
+  &.density:before {
+    content: "Density: "
+  }
 }
 
 .graph-legend-icon .fa {
@@ -106,7 +109,7 @@
   }
 
   .graph-legend-value {
-    &.current, &.max, &.min, &.total, &.avg {
+    &.current, &.max, &.min, &.total, &.avg, &.density {
       &:before {
         content: '';
       }
